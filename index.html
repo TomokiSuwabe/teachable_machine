@@ -63,6 +63,9 @@
             labelContainer.appendChild(document.createElement("div"));
         }
     }
+    function delayExec(time){
+        setTimeout('func();',time);
+    }
     var status = "finished"
     var continuity=0;
 
@@ -102,6 +105,7 @@
             labelContainer.childNodes[i].innerHTML = classPrediction;
         }
         showTime();
+        delayExec(1);
     }
     
 </script>
