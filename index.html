@@ -84,7 +84,7 @@
             status = "doing"
             continuity=0
         }
-        else if(prediction[3].probability.toFixed(2)>90){
+        else if(prediction[2].probability.toFixed(2)>90){
             status = "question"
             continuity++
             if(continuity>5){
@@ -92,7 +92,7 @@
                 continuity=0
             }
         }
-        else if(prediction[4].probability.toFixed(2)>90){
+        else if(prediction[3].probability.toFixed(2)>90){
             status = "riseki"
             continuity=0
         }
