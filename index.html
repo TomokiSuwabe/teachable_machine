@@ -19,7 +19,7 @@
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
 <script src="/js/config.js"></script>
-<script typw="module">
+<script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
@@ -106,16 +106,12 @@
             labelContainer.appendChild(document.createElement("div"));
         }
     }
-    function delayExec(delay){
-        setTimeout(predict(),delay);
-    }
     var status = "finished"
     var continuity=0;
 
     async function loop() {
         webcam.update(); // update the webcam frame
-        delayExec(1000);
-        // await predict();
+        setTimeout(predict(),1000);
         window.requestAnimationFrame(loop);
     }
 
