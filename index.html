@@ -121,15 +121,15 @@
     async function predict() {
         // predict can take in an image, video or canvas html element
         const prediction = await model.predict(webcam.canvas);
-        if(prediction[0].probability.toFixed(2)>80){
+        if(prediction[0].probability.toFixed(2)>0.8){
             status = "finised"
             continuity=0
         }
-        else if(prediction[1].probability.toFixed(2)>80){
+        else if(prediction[1].probability.toFixed(2)>0.8){
             status = "doing"
             continuity=0
         }
-        else if(prediction[2].probability.toFixed(2)>60){
+        else if(prediction[2].probability.toFixed(2)>0.6){
             status = "questionwait"
             continuity = now.getSeconds
             if(continuity>5){
@@ -139,7 +139,7 @@
                 // continuity=0
             }
         }
-        else if(prediction[3].probability.toFixed(2)>80){
+        else if(prediction[3].probability.toFixed(2)>0.8){
             status = "riseki"
             continuity=0
         }
