@@ -19,12 +19,16 @@
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
 <script src="/js/config.js"></script>
-<script type="text/javascript">
-
-// Import the functions you need from the SDKs you need
+<script typw="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
   import { doc, setDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+  // Import the functions you need from the SDKs you need
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+  
   // Your web app's Firebase configuration
   var firebaseConfig = {
     apiKey: "AIzaSyCjd80kJ8xlp0Yi5jwQo-I4weKANml-SFs",
@@ -39,6 +43,23 @@
     var app = initializeApp(firebaseConfig);
 
     var db = firebase.firestore();
+
+    function sendStatus(status,time) {
+        try{
+      	await setDoc(doc(db, "student"),{
+            name : "4J19",
+            status: status,
+            time : time
+	});
+      } catch(e) {
+        console.error("Error adding document: ", e);
+      }
+    }
+
+</script>
+    <!-- <input type="text" placeholder="number" id = "numberField"> --> 
+  <script type="text/javascript">
+
 // document.getElementById("text").innerHTML = showTime();
     // More API functions here:
     // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
@@ -57,13 +78,7 @@
         document.getElementById("text").innerHTML = text;
         return text
     }
-    function sendStatus(status,time) {
-        await setDoc(doc(db, "4j"), {
-        name: "4J19",
-        status: status,
-        time: time
-        });
-    }
+   
 
     // Load the image model and setup the webcam
     async function init() {
