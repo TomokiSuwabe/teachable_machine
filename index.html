@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -46,7 +46,7 @@
 
     function sendStatus(status,time) {
         try{
-      	await setDoc(doc(db, "student"),{
+      	await setDoc(doc(db, "status"),{
             name : "4J19",
             status: status,
             time : time
@@ -152,6 +152,7 @@
         showTime();
         document.getElementById("status").innerHTML = status
         document.getElementById("continuity").innerHTML = "あと"+(5-continuity)+"秒で質問したいと送ります"
+        sendStatus("question","2021:12:23:11:52")
     }
     
 </script>
