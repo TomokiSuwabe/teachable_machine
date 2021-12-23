@@ -113,12 +113,13 @@
 
     async function loop() {
         webcam.update(); // update the webcam frame
-        setTimeout(predict,1000);
+        predict();
         window.requestAnimationFrame(loop);
     }
 
     // run the webcam image through the image model
     async function predict() {
+        var tmp = new Date()
         // predict can take in an image, video or canvas html element
         const prediction = await model.predict(webcam.canvas);
         if(prediction[0].probability.toFixed(2)>0.8){
@@ -131,7 +132,9 @@
         }
         else if(prediction[2].probability.toFixed(2)>0.6){
             status = "questionwait"
-            continuity++
+            if(tmp.getMilliseconds==000){
+                continuity++
+            }
             // now.getSeconds
             if(continuity>5){
                 //データを送る
