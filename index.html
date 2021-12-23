@@ -110,7 +110,7 @@
 
     async function loop() {
         webcam.update(); // update the webcam frame
-        setTimeout(predict,1000);
+        predict();
         window.requestAnimationFrame(loop);
     }
 
@@ -141,7 +141,7 @@
             continuity=0
         }
         else{
-            status=" "
+            status="nashi"
         }
 
         for (let i = 0; i < maxPredictions; i++) {
