@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,12 +19,16 @@
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
 <script src="/js/config.js"></script>
-<script type="text/javascript">
-
-// Import the functions you need from the SDKs you need
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
   import { doc, setDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+  // Import the functions you need from the SDKs you need
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+  
   // Your web app's Firebase configuration
   var firebaseConfig = {
     apiKey: "AIzaSyCjd80kJ8xlp0Yi5jwQo-I4weKANml-SFs",
@@ -39,6 +43,23 @@
     var app = initializeApp(firebaseConfig);
 
     var db = firebase.firestore();
+
+    function sendStatus(status,time) {
+      try{
+      	setDoc(doc(db, "status"),{
+            name : "4J19",
+            status: status,
+            time : time
+	    });
+      } catch(e) {
+        console.error("Error adding document: ", e);
+      }
+    }
+
+</script>
+    <!-- <input type="text" placeholder="number" id = "numberField"> --> 
+  <script type="text/javascript">
+
 // document.getElementById("text").innerHTML = showTime();
     // More API functions here:
     // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
@@ -55,15 +76,11 @@
 
         var text = nowhours+":"+nowminutes+":"+nowseconds;
         document.getElementById("text").innerHTML = text;
-        return text
     }
-    function sendStatus(status,time) {
-        await setDoc(doc(db, "4j"), {
-        name: "4J19",
-        status: status,
-        time: time
-        });
+    function showStatus(){
+        document.getElementById("status").innerHTML = status;
     }
+   
 
     // Load the image model and setup the webcam
     async function init() {
@@ -91,16 +108,12 @@
             labelContainer.appendChild(document.createElement("div"));
         }
     }
-    function delayExec(time){
-        setTimeout(predict(),time);
-    }
     var status = "finished"
     var continuity=0;
 
     async function loop() {
         webcam.update(); // update the webcam frame
-        delayExec(1000);
-        // await predict();
+        predict();
         window.requestAnimationFrame(loop);
     }
 
@@ -108,30 +121,31 @@
     async function predict() {
         // predict can take in an image, video or canvas html element
         const prediction = await model.predict(webcam.canvas);
-        if(prediction[0].probability.toFixed(2)>80){
+        if(prediction[0].probability.toFixed(2)>0.8){
             status = "finised"
             continuity=0
         }
-        else if(prediction[1].probability.toFixed(2)>80){
+        else if(prediction[1].probability.toFixed(2)>0.8){
             status = "doing"
             continuity=0
         }
-        else if(prediction[2].probability.toFixed(2)>80){
-            status = "question"
-            continuity++
+        else if(prediction[2].probability.toFixed(2)>0.6){
+            status = "questionwait"
+            continuity = now.getSeconds
             if(continuity>5){
                 //データを送る
-                sendStatus(status,showTime())
-                continuity=0
+                // sendStatus(status,showTime())
+                status ="question"
+                // continuity=0
             }
         }
-        else if(prediction[3].probability.toFixed(2)>80){
+        else if(prediction[3].probability.toFixed(2)>0.8){
             status = "riseki"
             continuity=0
         }
-        else{
-            status=" "
-        }
+        // else{
+        //     status="nashi"
+        // }
 
         for (let i = 0; i < maxPredictions; i++) {
             const classPrediction =
@@ -139,12 +153,10 @@
             labelContainer.childNodes[i].innerHTML = classPrediction;
         }
         showTime();
-        document.getElementById("status").innerHTML = status
-        document.getElementById("continuity").innerHTML = "あと"+(5-continuity)+"で質問したいと送ります"
-        await setDoc(doc(citiesRef, "SF"), {
-            name: "San Francisco", state: "CA", country: "USA",
-            capital: false, population: 860000,
-            regions: ["west_coast", "norcal"] });
+        document.getElementById("status").innerHTML =  "ステータスは"+status+"です"
+        // document.getElementById("continuity").innerHTML = continuity
+        document.getElementById("continuity").innerHTML = "あと"+(continuity)+"秒で質問したいと送ります"
+        // sendStatus("question","2021:12:23:11:52")
     }
     
 </script>
