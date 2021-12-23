@@ -111,7 +111,7 @@
 
     async function loop() {
         webcam.update(); // update the webcam frame
-        setTimeout(predict(),1000);
+        setTimeout(predict,1000);
         window.requestAnimationFrame(loop);
     }
 
