@@ -128,12 +128,12 @@
         }
         else if(prediction[2].probability.toFixed(2)>60){
             status = "questionwait"
-            continuity++
+            continuity = now.getSeconds
             if(continuity>5){
                 //データを送る
                 // sendStatus(status,showTime())
                 status ="question"
-                continuity=0
+                // continuity=0
             }
         }
         else if(prediction[3].probability.toFixed(2)>80){
