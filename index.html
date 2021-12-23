@@ -45,12 +45,12 @@
     var db = firebase.firestore();
 
     function sendStatus(status,time) {
-        try{
+      try{
       	await setDoc(doc(db, "status"),{
             name : "4J19",
             status: status,
             time : time
-	});
+	    });
       } catch(e) {
         console.error("Error adding document: ", e);
       }
@@ -76,7 +76,6 @@
 
         var text = nowhours+":"+nowminutes+":"+nowseconds;
         document.getElementById("text").innerHTML = text;
-        return text
     }
    
 
@@ -151,8 +150,9 @@
         }
         showTime();
         document.getElementById("status").innerHTML = status
-        document.getElementById("continuity").innerHTML = "あと"+(5-continuity)+"秒で質問したいと送ります"
-        sendStatus("question","2021:12:23:11:52")
+        // document.getElementById("continuity").innerHTML = continuity
+        document.getElementById("continuity").innerHTML = "あと"+(continuity)+"秒で質問したいと送ります"
+        // sendStatus("question","2021:12:23:11:52")
     }
     
 </script>
