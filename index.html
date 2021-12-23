@@ -106,8 +106,8 @@
             labelContainer.appendChild(document.createElement("div"));
         }
     }
-    function delayExec(time){
-        setTimeout(predict(),time);
+    function delayExec(delay){
+        setTimeout(predict(),delay);
     }
     var status = "finished"
     var continuity=0;
@@ -155,11 +155,7 @@
         }
         showTime();
         document.getElementById("status").innerHTML = status
-        document.getElementById("continuity").innerHTML = "あと"+(5-continuity)+"で質問したいと送ります"
-        await setDoc(doc(citiesRef, "SF"), {
-            name: "San Francisco", state: "CA", country: "USA",
-            capital: false, population: 860000,
-            regions: ["west_coast", "norcal"] });
+        document.getElementById("continuity").innerHTML = "あと"+(5-continuity)+"秒で質問したいと送ります"
     }
     
 </script>
