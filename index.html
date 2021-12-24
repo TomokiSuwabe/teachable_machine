@@ -20,10 +20,8 @@
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
 <script src="/js/config.js"></script>
-  <!-- <input type="text" placeholder="number" id = "numberField"> --> 
-  <script type="text/javascript">
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
   import { getFirestore } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
@@ -59,6 +57,9 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase
       }
     }
 
+</script>
+    <!-- <input type="text" placeholder="number" id = "numberField"> --> 
+  <script type="text/javascript">
 
 // document.getElementById("text").innerHTML = showTime();
     // More API functions here:
