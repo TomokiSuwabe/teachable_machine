@@ -147,11 +147,6 @@
         // sendStatus("question","2021:12:23:11:52")
     }
     
-
-
-
-
-
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
     // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
@@ -179,9 +174,9 @@
       var db = getFirestore();
 
 
-      async function sendStatus(status,time) {
+    function sendStatus(status,time) {
           try{
-            await setDoc(doc(db, "user"),{
+            setDoc(doc(db, "user"),{
               name : "4J19",
               status: status,
               time : time
