@@ -90,9 +90,9 @@
     function showStatus(){
         document.getElementById("status").innerHTML = status;
     }
-    function writelog(){
+    function writelog(value){
         var text1 = document.createElement("span");
-        text1.innerHTML = showTime()+",ステータス送信"
+        text1.innerHTML = showTime()+","+value+":ステータス送信"
         var x = document.getElementById("sendlog")
         x.appendChild(text1)
     }
@@ -126,7 +126,7 @@
     var status = "finished"
     var continuity = 0;
     var sent = 0;
-
+    var regularSend =0;
     async function loop() {
         webcam.update(); // update the webcam frame
         predict();
@@ -143,17 +143,31 @@
         // predict can take in an image, video or canvas html element
         const prediction = await model.predict(webcam.canvas);
         if(prediction[0].probability.toFixed(2)>0.8){
-            status = "finised"
             continuity=0
             // if(sec==0&&sent==0)
+            if(sec==0&&regularSend==0){
+                status = "Finised"
+                regularSend=1;
+                writelog(status)
+            }
+            if(sec!=0){
+                regularSend=0;
+            }
             
         }
         else if(prediction[1].probability.toFixed(2)>0.8){
-            status = "doing"
             continuity=0
+            if(sec==0&&regularSend==0){
+                status = "Doing"
+                regularSend=1;
+                writelog(status)
+            }
+            if(sec!=0){
+                regularSend=0;
+            }
         }
         else if(prediction[2].probability.toFixed(2)>0.6){
-            status = "questionwait"
+            status = "QuestionWait"
             if(ms<100&&sent==0){
                 continuity++
                 sent=1
@@ -164,15 +178,22 @@
             // now.getSeconds
             if(continuity>5){
                 //データを送る
-                status ="question"
+                status ="Question"
                 continuity=0
                 sendStatus()
-                writelog()
+                writelog(status)
             }
         }
         else if(prediction[3].probability.toFixed(2)>0.8){
-            status = "riseki"
             continuity=0
+            if(sec==0&&regularSend==0){
+                status = "Riseki"
+                regularSend=1;
+                writelog(status)
+            }
+            if(sec!=0){
+                regularSend=0;
+            }
         }
         // else{
         //     status="nashi"
