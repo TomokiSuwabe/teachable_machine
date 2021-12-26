@@ -43,7 +43,7 @@
   // Initialize Firebase
     var app = initializeApp(firebaseConfig);
 
-    var db = firebase.firestore();
+    var db = getFirestore();
 
     async function sendStatus(status,time) {
         try{
