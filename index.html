@@ -142,7 +142,7 @@
         var ms = tmp.getMilliseconds();
         // predict can take in an image, video or canvas html element
         const prediction = await model.predict(webcam.canvas);
-        if(prediction[0].probability.toFixed(2)>0.8){
+        if(prediction[0].probability.toFixed(2)>0.7){
             continuity=0
             // if(sec==0&&sent==0)
             if(sec==0&&regularSend==0){
@@ -155,7 +155,7 @@
             }
             
         }
-        else if(prediction[1].probability.toFixed(2)>0.8){
+        else if(prediction[1].probability.toFixed(2)>0.7){
             continuity=0
             if(sec==0&&regularSend==0){
                 status = "Doing"
@@ -166,7 +166,7 @@
                 regularSend=0;
             }
         }
-        else if(prediction[2].probability.toFixed(2)>0.6){
+        else if(prediction[2].probability.toFixed(2)>0.7){
             status = "QuestionWait"
             if(ms<100&&sent==0){
                 continuity++
@@ -184,7 +184,7 @@
                 writelog(status)
             }
         }
-        else if(prediction[3].probability.toFixed(2)>0.8){
+        else if(prediction[3].probability.toFixed(2)>0.7){
             continuity=0
             if(sec==0&&regularSend==0){
                 status = "Riseki"
