@@ -129,12 +129,14 @@
     // run the webcam image through the image model
     async function predict() {
         var tmp = new Date();
+        var sec = tmp.getSeconds();
         var ms = tmp.getMilliseconds();
         // predict can take in an image, video or canvas html element
         const prediction = await model.predict(webcam.canvas);
         if(prediction[0].probability.toFixed(2)>0.8){
             status = "finised"
             continuity=0
+            
         }
         else if(prediction[1].probability.toFixed(2)>0.8){
             status = "doing"
@@ -152,8 +154,8 @@
             // now.getSeconds
             if(continuity>5){
                 //データを送る
-                // sendStatus(status,showTime())
                 status ="question"
+                sendStatus(status,showTime())
                 continuity=0
                 writelog()
             }
