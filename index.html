@@ -145,8 +145,8 @@
         if(prediction[0].probability.toFixed(2)>0.7){
             continuity=0
             // if(sec==0&&sent==0)
+            status = "Finised"
             if(sec==0&&regularSend==0){
-                status = "Finised"
                 regularSend=1;
                 writelog(status)
             }
@@ -157,8 +157,8 @@
         }
         else if(prediction[1].probability.toFixed(2)>0.7){
             continuity=0
+            status = "Doing"
             if(sec==0&&regularSend==0){
-                status = "Doing"
                 regularSend=1;
                 writelog(status)
             }
@@ -186,8 +186,8 @@
         }
         else if(prediction[3].probability.toFixed(2)>0.7){
             continuity=0
+            status = "Riseki"
             if(sec==0&&regularSend==0){
-                status = "Riseki"
                 regularSend=1;
                 writelog(status)
             }
