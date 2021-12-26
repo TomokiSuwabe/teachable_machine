@@ -123,7 +123,7 @@
                 //データを送る
                 status ="question"
                 continuity=0
-                document.getElementById("send").innerHTML = 1
+                sendStatus()
                 writelog()
             }
         }
@@ -131,7 +131,6 @@
             status = "riseki"
             continuity=0
         }
-        document.getElementById("send").innerHTML =0
         // else{
         //     status="nashi"
         // }
