@@ -5,6 +5,49 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+        import { doc, setDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+        // Import the functions you need from the SDKs you need
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+        
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+          apiKey: "AIzaSyCjd80kJ8xlp0Yi5jwQo-I4weKANml-SFs",
+          authDomain: "teachablemachine-d7316.firebaseapp.com",
+          projectId: "teachablemachine-d7316",
+          storageBucket: "teachablemachine-d7316.appspot.com",
+          messagingSenderId: "948617562294",
+          appId: "1:948617562294:web:eecf483c90aafeb2d2be17"
+        };
+        
+        
+    
+        // Initialize Firebase
+          var app = initializeApp(firebaseConfig);
+      
+          var db = getFirestore();
+    
+    
+        function sendStatus(status,time) {
+              try{
+                setDoc(doc(db, "user"),{
+                  name : "4J19",
+                  status: status,
+                  time : time
+              });
+            } catch(e) {
+              console.error("Error adding document: ", e);
+            }
+          }
+      
+      </script>
+      
 </head>
 <body>
     <div>Teachable Machine Image Model</div>
@@ -24,7 +67,7 @@
 
 <!-- <script src="/js/config.js"></script> -->
     <!-- <input type="text" placeholder="number" id = "numberField"> --> 
-  <script type="module">
+  <script>
 
 // document.getElementById("text").innerHTML = showTime();
     // More API functions here:
@@ -146,47 +189,6 @@
         document.getElementById("text").innerHTML = showTime();
         // sendStatus("question","2021:12:23:11:52")
     }
-    
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
-    import { getFirestore } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
-    import { doc, setDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
-    // Import the functions you need from the SDKs you need
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
-    
-    // Your web app's Firebase configuration
-    var firebaseConfig = {
-      apiKey: "AIzaSyCjd80kJ8xlp0Yi5jwQo-I4weKANml-SFs",
-      authDomain: "teachablemachine-d7316.firebaseapp.com",
-      projectId: "teachablemachine-d7316",
-      storageBucket: "teachablemachine-d7316.appspot.com",
-      messagingSenderId: "948617562294",
-      appId: "1:948617562294:web:eecf483c90aafeb2d2be17"
-    };
-    
-    
-
-    // Initialize Firebase
-      var app = initializeApp(firebaseConfig);
-  
-      var db = getFirestore();
-
-
-    function sendStatus(status,time) {
-          try{
-            setDoc(doc(db, "user"),{
-              name : "4J19",
-              status: status,
-              time : time
-          });
-        } catch(e) {
-          console.error("Error adding document: ", e);
-        }
-      }
-  
-  </script>
-
+    </script>
 </body>
 </html>
